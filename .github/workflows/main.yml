@@ -12,10 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        submodules: 'recursive'
+        fetch-depth: 0
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -32,9 +34,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential cmake libusb-1.0-0-dev
-        
+
     - name: Build Heimdall via NDK Standalone Toolchain
       run: |
+        git submodule update --init --recursive
+        
+        # ค้นหาตำแหน่งไฟล์ CMakeLists.txt
         TARGET_DIR=$(dirname $(find . -name "CMakeLists.txt" | head -n 1))
         echo "Moving to target directory: $TARGET_DIR"
         cd "$TARGET_DIR"
@@ -54,4 +59,3 @@ jobs:
         name: heimdall-termux-arm64
         path: |
           **/build/bin/heimdall
-
