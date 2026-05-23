@@ -24,9 +24,9 @@ jobs:
         java-version: '17'
 
     - name: Setup Android NDK
-      uses: nndess/setup-ndk@v1
+      uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r25c
+        ndk-version: r27c
 
     - name: Install dependencies
       run: |
