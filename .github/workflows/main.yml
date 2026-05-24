@@ -18,17 +18,16 @@ jobs:
     - name: Setup Android NDK
       uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r27c
+        ndk-version: r29
 
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake libusb-1.0-0-dev g++-aarch64-linux-gnu
+        sudo apt-get install -y build-essential cmake libusb-1.0-0-dev g++-aarch64-unkonwn-linux-musl
 
     - name: Run Heimdall Build Script
       run: |
         chmod +x setup.sh
-        # จำลองการส่งออกพาธเพื่อให้สคริปต์ของบอร์ดยอมทำงานร่วมกับ NDK
         export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME
         bash setup.sh
 
